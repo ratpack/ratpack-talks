@@ -1,0 +1,17 @@
+build
+bin
+downloads
+.gradle
+*.ipr
+*.iml
+*.iws
+out
+*.log
+*.hprof
+.settings
+.DS_Store
+.project
+.classpath
+target
+.idea
+*.zip
