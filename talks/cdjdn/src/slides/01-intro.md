@@ -1,4 +1,8 @@
-# Intro to Ratpack
+# ![Ratpack Logo](img/ratpack-logo.png)
+
+Intro to Ratpack
+
+2014-01-22
 
 ## About Me
 
@@ -19,9 +23,6 @@
 ## Tonight's Presentation
 
 * Overview of Ratpack
-    * What is it?
-    * Why use it?
-    * What can it do?
 * Demo
     * Start writing a simple app
     * Add features
