@@ -1,5 +1,13 @@
 # Overview
 
+## What is Ratpack NOT?
+
+* Servlet-based
+* Groovy-based
+* Just a Sinatra clone
+
+At one point, it was all of these things... but now it's so much more.
+
 ## What is Ratpack?
 
 Ratpack is a set of Java libraries that facilitate fast, efficient, evolvable and well tested HTTP applications.
@@ -8,8 +16,24 @@ It is built on the highly performant and efficient Netty event-driven networking
 
 Ratpack focuses on allowing HTTP applications to be efficient, modular, adaptive to new requirements and technologies, and well-tested over time.
 
-Ratpack is a new project, but stands on the shoulders of well established technologies and is built by developers with substantial experience in web application frameworks and tooling.
+Ratpack is a new project, but stands on the shoulders of well-established technologies and is built by developers with substantial experience in web application frameworks and tooling.
 It is currently pre-1.0 but under very active development.
+
+## Features
+
+* A full-stack, high throughput, non-blocking web framework
+* Built entirely on Java 8
+* Emphasis on Performance and Efficiency
+    * Both in runtime and development experience
+    * Hot-reloading available during development time
+    * Emphasis on developer testing, especially functional and integration
+
+## Core Dependencies
+
+* Minimum Java 8; allows deep support for Lambda Expressions
+* Netty for high-performance event-driven networking
+* Guava for common functionality missing from Java's standard library
+* Reactive Streams for standardized asynchronous stream processing
 
 ## Modularity
 
@@ -17,7 +41,7 @@ It is currently pre-1.0 but under very active development.
 * Pick-and-choose what aspects of the framework you want
 * No lock-in to a single way of doing things
 * No plugins; modularity through dependency-injected modules
-    * DI supported via a Registry abstraction
+    * DI supported via a `Registry` abstraction
     * Out-of-the-box integration with Guice (preferred) and Spring
 
 ## Current Modules
@@ -44,6 +68,7 @@ It is currently pre-1.0 but under very active development.
     }
     apply plugin: "io.ratpack.ratpack-java"
     repositories { jcenter() }
+    mainClassName = "App"
 
 ## Gradle Groovy Build
 
@@ -55,19 +80,23 @@ It is currently pre-1.0 but under very active development.
     }
     apply plugin: "io.ratpack.ratpack-groovy"
     repositories { jcenter() }
+    mainClassName = "App"
 
-## More Features
+## Groovy Support
 
-* A full-stack, high throughput, non-blocking web framework
-* Built entirely on Java 8, based on Netty
-
-
-* Emphasis on Performance and Efficiency
-    * Both in runtime and development experience
-    * Hot-reloading available during development time
-    * Emphasis on developer testing, especially functional and integration
 * Specialized support for writing apps in Groovy
-    * Why Groovy?
+* Why Groovy?
     * Similar performance to Java using Invoke Dynamic or Static Compilation
     * Supports static compilation, compile-time type checking, dynamic typing
     * Can pick-and-choose between these modes depending on the use case
+* Supports a rich DSL with support for type checking via `@DelegatesTo`
+* Rendering based on `MarkupTemplateEngine` and `Script`
+
+## 0.9.13 Preview
+
+* Will be released on Feb. 1
+    * We currently release on the first of every month
+* Two headline features:
+    * New launch approach
+    * New config module
+* Demos!
