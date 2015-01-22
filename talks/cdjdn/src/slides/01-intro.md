@@ -2,6 +2,8 @@
 
 Intro to Ratpack
 
+Follow @RatpackWeb on Twitter!
+
 2015-01-22
 
 ## About Me
