@@ -92,6 +92,25 @@ It is currently pre-1.0 but under very active development.
 * Supports a rich DSL with support for type checking via `@DelegatesTo`
 * Rendering based on `MarkupTemplateEngine` and `Script`
 
+## Architecture
+
+* Assemble a `RatpackServer.Definition`
+    * Contains a `ServerConfig`; defines settings required to start server
+    * Contains a `Registry`; DI abstraction, stores objects by type
+    * Contains the root `Handler`
+* Use the definition to build a `RatpackServer` that can then be started.
+* No need for a container; batteries included.
+
+## Handlers
+* All request processing is done via composition of `Handler`s
+* Each `Handler` in the chain is asked to respond to a request until one does.
+* Similar to a combination of `Servlet` and `Filter`.
+* A handler can:
+    * Respond to the request
+    * Delegate to the "next" `Handler`
+    * "Insert" `Handler`s into the chain and immediately delegate to them
+* `Handler`s operate on a `Context` which represents the current state of processing a request
+
 ## 0.9.13 Preview
 
 * Will be released on Feb. 1
@@ -99,4 +118,3 @@ It is currently pre-1.0 but under very active development.
 * Two headline features:
     * New launch approach
     * New config module
-* Demos!
