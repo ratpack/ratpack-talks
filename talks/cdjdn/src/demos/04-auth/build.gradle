@@ -25,9 +25,13 @@ dependencies {
     compile ratpack.dependency("pac4j")
     compile "org.pac4j:pac4j-oauth:1.6.0"
     testCompile ratpack.dependency("groovy-test")
-    testCompile dependencies.create("org.spockframework:spock-core:0.7-groovy-2.0", {
+    testCompile "org.spockframework:spock-core:0.7-groovy-2.0", {
         exclude group: "org.codehaus.groovy", module: "groovy-all"
-    })
+    }
+    testCompile "org.gebish:geb-spock:0.9.3"
+    testCompile "org.seleniumhq.selenium:selenium-firefox-driver:2.43.1"//, {
+      //exclude module: "guava"
+    //}
 }
 
 mainClassName = "App"

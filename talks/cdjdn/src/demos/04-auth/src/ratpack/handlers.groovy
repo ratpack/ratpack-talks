@@ -8,6 +8,7 @@ ratpack {
         get {
             response.send("text/html", """
             |<html>
+            |<head><title>Home</title></head>
             |<body>
             |<ul>
             |<li><a href="auth">auth</a>
@@ -21,6 +22,7 @@ ratpack {
         get("auth") { GitHubProfile gitHubProfile ->
             response.send("text/html", """
             |<html>
+            |<head><title>Auth</title></head>
             |<body>
             |<a href="..">Up</a>
             |<h1>Auth: Logged in as <a href="${gitHubProfile.getAttribute("html_url")}">${gitHubProfile.username}</a> (${gitHubProfile.displayName})</h1>
@@ -35,6 +37,7 @@ ratpack {
                 def gitHubProfile = gitHubProfileOpt.get()
                 response.send("text/html", """
                 |<html>
+                |<head><title>NoAuth</title></head>
                 |<body>
                 |<a href="..">Up</a>
                 |<h1>NoAuth: Logged in as <a href="${gitHubProfile.getAttribute("html_url")}">${gitHubProfile.username}</a> (${gitHubProfile.displayName})</h1>
@@ -45,6 +48,7 @@ ratpack {
             } else {
                 response.send("text/html", """
                 |<html>
+                |<head><title>NoAuth</title></head>
                 |<body>
                 |<a href="..">Up</a>
                 |<h1>NoAuth: Not logged in</h1>
@@ -57,6 +61,7 @@ ratpack {
             request.get(Session).terminate()
             response.send("text/html", """
             |<html>
+            |<head><title>LoggedOut</title></head>
             |<body>
             |<a href="..">Up</a>
             |<h1>Logged out from handlers</h1>

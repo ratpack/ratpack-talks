@@ -1,50 +1,101 @@
-import ratpack.http.internal.HttpHeaderConstants
+import geb.spock.GebReportingSpec
 import ratpack.test.ApplicationUnderTest
-import ratpack.test.http.TestHttpClients
 import spock.lang.AutoCleanup
-import spock.lang.Specification
+import spock.lang.Shared
 
-class AppSpec extends Specification {
+class AppSpec extends GebReportingSpec {
+    @Shared
     @AutoCleanup
     def aut = ApplicationUnderTest.of(App)
-    def client = TestHttpClients.testHttpClient(aut, { rs -> rs.redirects(10) } )
+
+    def setup() {
+        browser.baseUrl = aut.address.toString()
+    }
+
+    def cleanup() {
+        to LogOutPage
+        via GitHubLogOutPage
+        if (isAt(GitHubLogOutPage)) {
+            signOutButton.click()
+        }
+    }
 
     void "noAuth doesn't require authentication"() {
-        expect:
-        client.getText("noauth").contains("NoAuth: Not logged in")
+        given:
+        to HomePage
+
+        when:
+        noAuthLink.click()
+
+        then:
+        at NoAuthPage
+        header.text() == "NoAuth: Not logged in"
     }
 
     void "auth requires authentication"() {
+        given:
+        to HomePage
+
         when:
-        def response = client.requestSpec({ rs -> rs.redirects(0) }).get("auth")
+        authLink.click()
 
         then:
-        println response.statusCode
-        println response.headers.get(HttpHeaderConstants.LOCATION)
-        println response.headers.asMultiValueMap()
-        println client.cookies
-        response.statusCode == 302
-        response.status.message == "Found"
-        response.headers.get(HttpHeaderConstants.LOCATION).startsWith("https://github.com/login/oauth/authorize")
-    }
+        at GithubLoginPage
 
-    void "can authenticate"() {
         when:
-        def response = client.get("auth")
+        login(username, password)
+        if (isAt(GithubAuthPage)) {
+            authorizeButton.click()
+        }
 
         then:
-        println response.statusCode
-        println response.headers.get(HttpHeaderConstants.LOCATION)
-        println response.headers.asMultiValueMap()
-        println client.cookies
-        response.statusCode == 200
+        at AuthPage
+        header.text() == "Auth: Logged in as davidmc24 (David M. Carr)"
     }
 
     void "after authentication, noAuth displays logged in information"() {
+        given:
+        via AuthPage
+        at GithubLoginPage
+        login(username, password)
+        if (isAt(GithubAuthPage)) {
+            authorizeButton.click()
+        }
 
+        when:
+        to NoAuthPage
+
+        then:
+        header.text() == "NoAuth: Logged in as davidmc24 (David M. Carr)"
     }
 
     void "logout terminates session"() {
+        given:
+        via AuthPage
+        at GithubLoginPage
+        login(username, password)
+        if (isAt(GithubAuthPage)) {
+            authorizeButton.click()
+        }
 
+        when:
+        to LogOutPage
+
+        then:
+        header.text().startsWith("Logged out")
+
+        when:
+        to NoAuthPage
+
+        then:
+        header.text() == "NoAuth: Not logged in"
+    }
+
+    String getUsername() {
+        System.getenv("GITHUB_USERNAME")
+    }
+
+    String getPassword() {
+        System.getenv("GITHUB_PASSWORD")
     }
 }
