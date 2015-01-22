@@ -59,10 +59,11 @@ ratpack {
             |<html>
             |<body>
             |<a href="..">Up</a>
-            |<h1>Logged out</h1>
+            |<h1>Logged out from handlers</h1>
             |</body>
             |</html>
             """.stripMargin())
         }
+//        get("logout", new LogoutHandler())
     }
 }

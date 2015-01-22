@@ -24,6 +24,10 @@ dependencies {
     compile "org.slf4j:slf4j-simple:1.7.10"
     compile ratpack.dependency("config")
     compile ratpack.dependency("jackson")
+    testCompile ratpack.dependency("groovy-test")
+    testCompile dependencies.create("org.spockframework:spock-core:0.7-groovy-2.0", {
+        exclude group: "org.codehaus.groovy", module: "groovy-all"
+    })
 }
 
 mainClassName = "App"
