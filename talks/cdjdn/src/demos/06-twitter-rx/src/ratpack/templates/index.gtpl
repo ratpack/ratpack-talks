@@ -1,11 +1,11 @@
 import java.time.format.DateTimeFormatter
 
 layout "layout.gtpl",
-title: "Recent Top Ratpack Tweets",
+title: "Recent Top @RatpackWeb Tweets",
 bodyContents: contents {
     div(class:"panel panel-primary") {
         div(class:"panel-heading") {
-            h1(class:"panel-title", "Recent Top Ratpack Tweets")
+            h1(class:"panel-title", "Recent Top @RatpackWeb Tweets")
         }
         ul(class:"list-group") {
             tweets.each { RatpackTweet tweet ->
