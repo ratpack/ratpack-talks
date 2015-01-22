@@ -1,0 +1,29 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "http://oss.jfrog.org/oss-snapshot-local" }
+        maven { url "http://clinker.netty.io/nexus/content/repositories/snapshots" }
+    }
+    dependencies {
+        classpath "io.ratpack:ratpack-gradle:0.9.13-SNAPSHOT"
+    }
+}
+
+apply plugin: "io.ratpack.ratpack-groovy"
+apply plugin: "idea"
+
+repositories {
+    jcenter()
+    maven { url "http://oss.jfrog.org/oss-snapshot-local" }
+    maven { url "http://clinker.netty.io/nexus/content/repositories/snapshots" }
+}
+
+dependencies {
+    // Currently broken https://github.com/spring-projects/spring-loaded/issues/89
+    // springloaded "org.springframework:springloaded:1.2.1.RELEASE"
+    compile "org.slf4j:slf4j-simple:1.7.10"
+    compile ratpack.dependency("pac4j")
+    compile "org.pac4j:pac4j-oauth:1.6.0"
+}
+
+mainClassName = "App"
