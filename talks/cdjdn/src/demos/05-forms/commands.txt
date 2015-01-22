@@ -1,0 +1,8 @@
+curl --verbose http://localhost:5050 -X POST -H "Content-Type: application/json" --data '{"name":"Sheldon","address":"Apt 4A"}'
+curl --verbose http://localhost:5050 -X POST -H "Content-Type: application/json" --data '{"name":"Leonard","address":"Apt 4A"}'
+curl --verbose http://localhost:5050/1 -H "Accept: application/json"
+curl --verbose http://localhost:5050/1 -H "Accept: text/plain"
+curl --verbose -X PUT http://localhost:5050/1 --data '{"name":"Sheldon", "address":"Apt 4A"}' -H "Content-Type: application/json"
+curl --verbose http://localhost:5050/1 -H "Accept: text/plain" -X DELETE
+
+curl --verbose -X PUT http://localhost:5050/2 --data '{"name":"Leonard", "address":"Apt 4B"}' -H "Content-Type: application/json"

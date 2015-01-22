@@ -1,0 +1,26 @@
+<html>
+    <head>Index</head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="person : ${people}">
+                    <td th:text="${person.id}">1</td>
+                    <td th:text="${person.name}">Sheldon</td>
+                    <td th:text="${person.address}">Apt 4A</td>
+                </tr>
+            </tbody>
+        </table>
+        <form method="post">
+            <label>Name: <input type="text" name="name"/></label>
+            <label>Address: <input type="text" name="address"/></label>
+            <input type="submit"/>
+        </form>
+    </body>
+</html>
